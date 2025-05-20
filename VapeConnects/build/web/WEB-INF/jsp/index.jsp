@@ -34,5 +34,6 @@
         Belum Punya Akun? <a href="register.jsp">Daftar disini</a>
       </p>
     </div>
+    <jsp:include page="Template/footer.jsp" />
   </body>
 </html>
