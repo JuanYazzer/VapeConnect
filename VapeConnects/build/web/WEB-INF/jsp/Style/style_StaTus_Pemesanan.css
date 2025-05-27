@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px;
+  border-bottom: 1px solid #ccc;
+  background-color: white;
+  font-family: Arial, sans-serif;
+}
+
+
+.logo {
+  width: 100px;
+  height: 100px;
+}
+
+
+.menu {
+  display: flex;
+  gap: 100px;
+}
+
+.menu a {
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  position: relative;
+  padding-bottom: 5px;
+}
+
+
+.menu a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background-color: black;
+}
+
+
+.user-email {
+  background-color: rgba(169, 169, 169, 0.52);
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 25px;
+}
+
+.footer {
+  background-color: #000;
+  color: #fff;
+  padding: 30px 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.footer-logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.footer-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.footer-content p {
+  margin: 5px 0;
+}
+
+.footer-contact-row {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.footer-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 250px;
+  text-align: left;
+}
+
+.footer-divider {
+  border: none;
+  height: 1px;
+  background-color: #adadad;
+  margin: 20px 0;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer-bottom {
+  font-size: 0.9em;
+  color: #aaa;
+}
+
+html,body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.status-container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 6px 16px;
+  border-radius: 20px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tab-inactive {
+  background-color: #b1afba; 
+  color: white;
+}
+
+.tab-active {
+  background-color: black;
+  color: white;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  border-radius: 12px;
+  padding: 16px;
+  font-weight: bold;
+}
+
+.header-left {
+  width: 90%;
+  text-align: left;
+}
+.header-right {
+  width: 10%;
+  text-align: center;
+  padding-right: 10px;
+}

@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 20px;
+    border-bottom: 1px solid #ccc;
+    background-color: white;
+    font-family: Arial, sans-serif;
+}
+
+
+.logo {
+    width: 100px;
+    height: 100px;
+}
+
+
+.menu {
+    display: flex;
+    gap: 100px;
+}
+
+.menu a {
+    text-decoration: none;
+    font-size: 25px;
+    color: black;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+
+.menu a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: black;
+}
+
+
+.user-email {
+    background-color: rgba(169, 169, 169, 0.52);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 25px;
+}
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.footer-logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.footer-icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.footer-content p {
+    margin: 5px 0;
+}
+
+.footer-contact-row {
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 250px;
+    text-align: left;
+}
+
+.footer-divider {
+    border: none;
+    height: 1px;
+    background-color: #adadad;
+    margin: 20px 0;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-bottom {
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.transaction-container {
+    padding: 30px;
+    overflow-x: auto;
+    box-sizing: border-box;
+}
+
+
+.transaction-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.transaction-table thead {
+    background-color: black;
+}
+
+.transaction-table th,
+.transaction-table td {
+    padding: 16px;
+    text-align: center;
+}
+
+.transaction-table th {
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+
+.transaction-table td {
+    background-color: #fff;
+}
+
+.transaction-table img {
+    width: 70px;
+    height: auto;
+}
+
+.rating-star {
+    font-size: 20px;
+    color: gold;
+}
