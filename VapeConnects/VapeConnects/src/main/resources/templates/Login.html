@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+  </head>
+  <body class="d-flex justify-content-center align-items-center vh-100 bg-light">
+    <div class="p-4 bg-white shadow rounded w-25">
+        <h3 class="text-center mb-4">Login</h3>
+        <form action="login" method="post">
+            <input type="text" name="username" class="form-control mb-2" placeholder="Username" required/>
+            <input type="password" name="password" class="form-control mb-2" placeholder="Password" required/>
+            <!-- Tambahkan ini di dalam div form -->
+            <p class="text-danger text-center" th:if="${error}" th:text="${error}"></p>
+            <button type="submit" class="btn btn-dark w-100">Login</button>
+            
+        </form>
+        <p class="text-center mt-3">Belum Punya Akun? <a href="/register">Daftar disini</a></p>
+    </div>
+</body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</html>
