@@ -26,12 +26,11 @@ public class AdminController {
         Map<String, Object> stats = dashboardService.getDashboardStats();
         
         // Tambahkan data ke model
-        model.addAttribute("totalProducts", stats.get("totalProducts"));
-        model.addAttribute("lowStockProducts", stats.get("lowStockProducts"));
+        model.addAttribute("totalProduk", stats.get("totalProducts"));
+        model.addAttribute("allProducts", stats.get("allProducts"));
         model.addAttribute("bestSellers", stats.get("bestSellers"));
         model.addAttribute("totalUsers", stats.get("totalUsers"));
-        model.addAttribute("allProducts", stats.get("allProducts"));
-        model.addAttribute("totalRevenue", stats.get("totalRevenue"));
+        model.addAttribute("lowStockProducts", stats.get("lowStockProducts"));
         
         return "admin/index";
     }

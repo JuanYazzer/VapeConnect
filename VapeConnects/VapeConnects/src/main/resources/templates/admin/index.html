@@ -93,7 +93,7 @@
                             <div class="card-body">
                                 <h5 class="card-title">Total Produk</h5>
                                 <h2 class="mb-0" th:text="${totalProduk}">0</h2>
-                                <p class="mb-0"><small>4 produk baru bulan ini</small></p>
+                                <p class="mb-0"><small th:text="${lowStockProducts} + ' produk stok rendah'">4 produk baru bulan ini</small></p>
                             </div>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                         <div class="card stat-card bg-warning text-dark">
                             <div class="card-body">
                                 <h5 class="card-title">Aktivitas Pengguna</h5>
-                                <h2>143</h2>
+                                <h2 th:text="${totalUsers}">143</h2>
                                 <p class="mb-0"><small>12 aktif hari ini</small></p>
                             </div>
                         </div>
@@ -149,20 +149,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Vape Pro X</td>
-                                                <td>45</td>
-                                                <td>Rp9.000.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Liquid Mint</td>
-                                                <td>32</td>
-                                                <td>Rp4.800.000</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Coil Set</td>
-                                                <td>28</td>
-                                                <td>Rp2.800.000</td>
+                                            <tr th:each="produk : ${bestSellers}">
+                                                <td th:text="${produk.name}">Vape Pro X</td>
+                                                <td th:text="${produk.stock}">45</td>
+                                                <td th:text="'Rp' + ${#numbers.formatDecimal(produk.price, 1, 2, 'COMMA')}">Rp9.000.000</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -190,41 +180,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Produk A</td>
-                                        <td>50</td>
-                                        <td>Rp200.000</td>
-                                        <td><span class="badge bg-success">Aktif</span></td>
+                                    <tr th:each="produk : ${allProducts}">
+                                        <td th:text="${produk.name}">Produk A</td>
+                                        <td th:text="${produk.stock}">50</td>
+                                        <td th:text="'Rp' + ${#numbers.formatDecimal(produk.price, 1, 2, 'COMMA')}">Rp200.000</td>
                                         <td>
-                                            <button class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                            <span th:if="${produk.stock} > 0" class="badge bg-success">Aktif</span>
+                                            <span th:if="${produk.stock} <= 0" class="badge bg-secondary">Tidak aktif</span>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Produk B</td>
-                                        <td>30</td>
-                                        <td>Rp150.000</td>
-                                        <td><span class="badge bg-success">Aktif</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Produk C</td>
-                                        <td>0</td>
-                                        <td>Rp250.000</td>
-                                        <td><span class="badge bg-secondary">Tidak aktif</span></td>
-                                        <td>
-                                            <button class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></button>
-                                            <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Produk D</td>
-                                        <td>20</td>
-                                        <td>Rp100.000</td>
-                                        <td><span class="badge bg-success">Aktif</span></td>
                                         <td>
                                             <button class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></button>
                                             <button class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
