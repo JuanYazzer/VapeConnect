@@ -18,7 +18,7 @@ public class LogRegController {
     public String loginPost(@RequestParam(name="username") String username, 
                             @RequestParam(name="password") String password, Model model) {
         if (username.equals("admin") && password.equals("admin")) {
-            return "redirect:/home/produk";  // Redirect ke /home/produk
+            return "redirect:/admin/index";  // Redirect ke /home/produk
         } else {
             model.addAttribute("error", "Username atau password salah.");
             return "Login";
