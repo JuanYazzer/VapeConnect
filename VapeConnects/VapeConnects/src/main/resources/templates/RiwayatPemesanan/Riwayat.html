@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -104,6 +104,33 @@
       font-size: 0.9em;
       color: #aaa;
     }
+
+    .produk-card {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+    }
+
+    .produk-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-right: 20px;
+    }
+
+    .rating-select {
+      width: 60px;
+      margin-right: 10px;
+    }
+
+    .rating-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -111,60 +138,76 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
     <div class="container-fluid align-items-center">
-      <img src="/VapeConnects/VapeConnects/src/main/resources/static/images/logo.png" alt="logo vcs" class="logo me-3">
+      <img th:src="@{/images/logo.png}" alt="logo vcs" class="logo me-3">
       <div class="d-flex flex-grow-1 justify-content-center menu gap-5">
-        <a href="Beranda.jsp" class="nav-link">Beranda</a>
-        <a href="Produk.jsp" class="nav-link">Produk</a>
-        <a href="Riwayat_Transaksi.jsp" class="nav-link active">Riwayat Transaksi</a>
-        <a href="Status_Pemesanan.jsp" class="nav-link">Keranjang</a>
+        <a href="Beranda.html" class="nav-link">Beranda</a>
+        <a href="Produk.html" class="nav-link">Produk</a>
+        <a href="Riwayat_Transaksi.html" class="nav-link active">Riwayat Transaksi</a>
+        <a href="Status_Pemesanan.html" class="nav-link">Keranjang</a>
       </div>
-      <div class="user-email">baskaraputra@gmail.com</div>
+      <div class="user-email" th:text="${email}">baskaraputra@gmail.com</div>
     </div>
   </nav>
 
-<c:forEach var="item" items="${riwayat}">
-  <div class="d-flex justify-content-between align-items-center mb-3 px-2">
-    <div class="w-25">${item.namaProduk}</div>
-    <div class="w-25 text-center">${item.deskripsi}</div>
-    <div class="w-15 text-center">${item.jumlah}</div>
-    <div class="w-20 text-center">Rp ${item.totalHarga}</div>
-    <div class="w-15 text-end">${item.rating} ⭐</div>
-  </div>
-</c:forEach>
-
+  <!-- Main Content -->
+  <main class="flex-grow-1">
+    <div class="container my-5">
+      <h1 class="mb-4">Produk</h1>
+      <div th:each="product : ${products}">
+        <div class="produk-card">
+          <img th:src="@{'/images/' + ${product.imagePath}}" alt="Product Image" class="produk-img">
+          <div class="flex-grow-1">
+            <h3 th:text="${product.name}">Nama Produk</h3>
+            <p th:text="${product.description}">Deskripsi produk</p>
+            <p>Harga: <span th:text="${'Rp.' + #numbers.formatDecimal(product.price, 1, 2, 'POINT')}">Rp.800.000</span></p>
+            <p>Jumlah Terjual: <span th:text="${@orderItemService.getTotalQuantityByProductId(product.id)}">0</span></p>
+          </div>
+          <div>
+            <form th:action="@{/produk/review}" method="post">
+              <input type="hidden" name="productId" th:value="${product.id}">
+              <select name="rating" class="rating-select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+              <button type="submit" class="rating-button">Kirim Rating</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <!-- Footer -->
   <footer class="footer mt-auto">
     <div class="text-center">
-      <img src="/VapeConnects/VapeConnects/src/main/resources/static/images/logo.png" alt="logo vcs" class="footer-logo">
-      <p><img src="/VapeConnects/VapeConnects/src/main/resources/static/images/ig.png" alt="ig" class="footer-icon"> vapeconnects</p>
-
+      <img th:src="@{/images/logo.png}" alt="logo vcs" class="footer-logo">
+      <p><img th:src="@{/images/ig.png}" alt="ig" class="footer-icon"> vapeconnects</p>
       <div class="footer-contact-row">
         <div class="footer-item">
-          <img src="/VapeConnects/VapeConnects/src/main/resources/static/images/home.png" alt="home" class="footer-icon">
+          <img th:src="@{/images/home.png}" alt="home" class="footer-icon">
           <div>
             <p><strong>XYZ Road, ABX Building</strong></p>
             <p>Tanjungpinang, Kepulauan Riau, IND</p>
           </div>
         </div>
-
         <div class="footer-item">
-          <img src="/VapeConnects/VapeConnects/src/main/resources/static/images/telp.png" alt="telp" class="footer-icon">
+          <img th:src="@{/images/telp.png}" alt="telp" class="footer-icon">
           <div>
             <p><strong>+62 8212345678</strong></p>
             <p>Monday to Saturday, 10 AM to 6 PM</p>
           </div>
         </div>
-
         <div class="footer-item">
-          <img src="/VapeConnects/VapeConnects/src/main/resources/static/images/mail.png" alt="mail" class="footer-icon">
+          <img th:src="@{/images/mail.png}" alt="mail" class="footer-icon">
           <div>
             <p><strong>info@rkvapestore.com</strong></p>
             <p>Email us your query</p>
           </div>
         </div>
       </div>
-
       <hr class="footer-divider">
       <p class="footer-bottom">Getting money is our motive</p>
     </div>
