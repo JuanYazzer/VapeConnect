@@ -1,5 +1,7 @@
 package com.Tubes.VapeConnects.model;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
@@ -13,6 +15,8 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private String age; // atau ubah ke int kalau kamu mau umur, atau LocalDate kalau tanggal lahir
+
     public User() {
     }
     public User(int id, String username, String email, String password) {
@@ -30,6 +34,35 @@ public class User {
     public String getEmail() {
         return email;
     }
+    public String getAge() {
+    return age;
+    }
+
+    public void setAge(String age) {
+    this.age = age;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email; 
+    }
+
+
     public void login(String username, String password) {
         // Logic for user login
         if (this.username.equals(username) && this.password.equals(password)) {
