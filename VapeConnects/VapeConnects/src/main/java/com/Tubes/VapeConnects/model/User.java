@@ -1,7 +1,4 @@
 package com.Tubes.VapeConnects.model;
-
-import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.GeneratedValue;
