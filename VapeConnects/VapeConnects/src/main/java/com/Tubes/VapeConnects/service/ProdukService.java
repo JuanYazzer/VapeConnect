@@ -29,4 +29,9 @@ public class ProdukService {
     public void deleteProduk(Integer id) {
         produkRepository.deleteById(id);
     }
+
+    public Produk getProdukById(Long id) {
+    return produkRepository.findById(id.intValue()).orElse(null);
+}
+
 }
