@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tambah Produk</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Tambah Produk Baru</h2>
+            <a th:href="@{/admin/index}" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Kembali ke Dashboard
+            </a>
+        </div>
+        
+        <form th:action="@{/admin/produk/simpan}" th:object="${produk}" method="post">
+            <div class="mb-3">
+                <label for="name" class="form-label">Nama Produk</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}" required>
+            </div>
+            
+            <div class="mb-3">
+                <label for="description" class="form-label">Deskripsi</label>
+                <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label for="price" class="form-label">Harga (Rp)</label>
+                    <input type="number" class="form-control" id="price" th:field="*{price}" min="0" step="1000" required>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label for="stock" class="form-label">Stok</label>
+                    <input type="number" class="form-control" id="stock" th:field="*{stock}" min="0" required>
+                </div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="imagePath" class="form-label">Path Gambar</label>
+                <input type="text" class="form-control" id="imagePath" th:field="*{imagePath}">
+                <small class="form-text text-muted">Contoh: images/produk1.jpg</small>
+            </div>
+            
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-plus-circle"></i> Tambah Produk
+                </button>
+                <a th:href="@{/admin/index}" class="btn btn-outline-secondary">Batal</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

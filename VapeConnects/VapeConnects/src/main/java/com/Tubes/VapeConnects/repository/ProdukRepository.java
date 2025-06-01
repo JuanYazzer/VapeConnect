@@ -5,13 +5,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProdukRepository extends JpaRepository<Produk, Integer> {
     
-    // Cari produk dengan stok kurang dari nilai tertentu
     List<Produk> findByStockLessThan(int stock);
     
-    // Ambil 3 produk dengan stok terkecil
     List<Produk> findTop3ByOrderByStockAsc();
+    
+    // Tambahkan method untuk mencari semua produk
+    List<Produk> findAll();
+    
+    // Tambahkan method untuk mencari produk berdasarkan ID
+    Optional<Produk> findById(Integer id);
+    
+    // Tambahkan method untuk menghapus produk
+    void deleteById(Integer id);
 }

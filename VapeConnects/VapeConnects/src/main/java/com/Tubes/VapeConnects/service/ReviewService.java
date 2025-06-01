@@ -22,7 +22,7 @@ public class ReviewService {
     @Autowired
     private ProdukService produkService;
 
-    public boolean hasUserReviewedProduct(String username, Long productId) {
+    public boolean hasUserReviewedProduct(String username, int productId) {
         User user = userRepository.findByUsername(username);
         Produk product = produkService.getProdukById(productId);
         return reviewRepository.existsByUserAndProduct(user, product);

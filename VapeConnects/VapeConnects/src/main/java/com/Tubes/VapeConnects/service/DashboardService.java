@@ -6,6 +6,7 @@ import com.Tubes.VapeConnects.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,9 @@ public class DashboardService {
         // 5. Daftar semua produk untuk manajemen produk
         List<Produk> allProducts = produkRepository.findAll();
         stats.put("allProducts", allProducts);
+        
+        // 6. Total pendapatan (dummy data untuk sementara)
+        stats.put("totalRevenue", new BigDecimal("20000000"));
         
         return stats;
     }

@@ -46,7 +46,7 @@ public class ProductController {
     }
 
     @PostMapping("/review")
-    public String submitReview(@RequestParam Long productId,
+    public String submitReview(@RequestParam int productId,
                                @RequestParam Integer rating,
                                Principal principal,
                                RedirectAttributes redirectAttributes) {

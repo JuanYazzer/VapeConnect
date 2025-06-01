@@ -10,28 +10,28 @@ import java.util.Optional;
 
 @Service
 public class ProdukService {
+
+    private final ProdukRepository ProdukRepository;
+
     @Autowired
-    private ProdukRepository produkRepository;  // Nama variabel konsisten dengan tipe
-    
+    public ProdukService(ProdukRepository ProdukRepository) {
+        this.ProdukRepository = ProdukRepository;
+    }
+
     public List<Produk> getAllProduk() {
-        return produkRepository.findAll();  // Menggunakan variabel yang benar
+        return ProdukRepository.findAll();
     }
-    
-    public Optional<Produk> getProdukById(Integer id) {  // Menggunakan Integer bukan long
-        return produkRepository.findById(id);
+
+    public Produk getProdukById(Integer id) {
+        Optional<Produk> produk = ProdukRepository.findById(id);
+        return produk.orElseThrow(() -> new RuntimeException("Produk tidak ditemukan"));
     }
-    
-    // Tambahkan method lain sesuai kebutuhan
+
     public Produk saveProduk(Produk produk) {
-        return produkRepository.save(produk);
+        return ProdukRepository.save(produk);
     }
-    
+
     public void deleteProduk(Integer id) {
-        produkRepository.deleteById(id);
+        ProdukRepository.deleteById(id);
     }
-
-    public Produk getProdukById(Long id) {
-    return produkRepository.findById(id.intValue()).orElse(null);
-}
-
 }
