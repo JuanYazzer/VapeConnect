@@ -2,6 +2,7 @@ package com.Tubes.VapeConnects.controllers;
 
 import java.util.List;
 
+import jakarta.servlet.http.HttpSession; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +21,17 @@ public class HomeController {
     public HomeController(ProdukRepository produkRepository) {
         this.produkRepository = produkRepository;
     }
-
     @GetMapping("/produk")
-    public String showProducts(Model model) {
+    public String showProducts(Model model, HttpSession session) {
+        String username = (String) session.getAttribute("username");
         List<Produk> produkList = produkRepository.findAll();
+
+        model.addAttribute("username", username);
         model.addAttribute("produkList", produkList);
+
         return "home/produk";
     }
+
     @GetMapping("/beranda")
     public String showBeranda() {
         return "home/beranda";

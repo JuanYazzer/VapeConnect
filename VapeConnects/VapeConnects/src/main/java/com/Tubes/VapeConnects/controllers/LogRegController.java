@@ -5,7 +5,7 @@ import com.Tubes.VapeConnects.model.Admin;
 
 import java.time.LocalDate;
 import java.time.Period;
-
+import jakarta.servlet.http.HttpSession; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,17 +39,22 @@ public class LogRegController {
     @PostMapping("/login")
     public String loginPost(@RequestParam String username, 
                         @RequestParam String password,
-                        Model model) {
+                        Model model,
+                        HttpSession session) {
 
         User user = userRepository.findByUsername(username);
         Admin admin = adminRepository.findByUsername(username); 
 
         if (admin != null && admin.getPassword().equals(password)) {
+            session.setAttribute("username", admin.getUsername());
+            session.setAttribute("role", "admin");
             return "redirect:/admin/index"; // ngarah ke halaman user 
         }
 
         if (user != null && user.getPassword().equals(password)) {
-            return "redirect:/home/produk"; // ngarah ke halaman user 
+            session.setAttribute("username", user.getUsername());
+            session.setAttribute("role", "user");
+            return "redirect:/home/produk/produk"; // ngarah ke halaman user 
         } else {
             model.addAttribute("error", "Username atau password salah.");
             return "Login";

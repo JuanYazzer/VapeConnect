@@ -15,7 +15,9 @@
     </style>
 </head>
 <body class="bg-light">
-
+<div>   
+    <p th:text="'Selamat datang, ' + ${username}"></p>
+</div>
 <div class="container mt-5">
     <h2 class="mb-4">Daftar Produk</h2>
     <table class="table table-bordered table-hover align-middle bg-white">
@@ -52,6 +54,7 @@
 <div th:if="${message}" class="alert alert-success">
     <p th:text="${message}"></p>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
