@@ -54,7 +54,7 @@ public class LogRegController {
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("username", user.getUsername());
             session.setAttribute("role", "user");
-            return "redirect:/home/produk/produk"; // ngarah ke halaman user 
+            return "redirect:/home/produk"; // ngarah ke halaman user 
         } else {
             model.addAttribute("error", "Username atau password salah.");
             return "Login";
