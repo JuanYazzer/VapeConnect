@@ -1,0 +1,6 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.configuration.maven.userSettings": "C:\\Program Files\\Apache\\Maven\\apache-maven-3.9.9-bin\\apache-maven-3.9.9\\bin"
+
+}
