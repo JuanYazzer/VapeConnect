@@ -34,7 +34,7 @@ public class ProductController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping
+    @GetMapping("/produk")
     public String showProducts(Model model) {
         List<Produk> allProducts = productService.getAllProduk();
         List<Produk> soldProducts = allProducts.stream()
