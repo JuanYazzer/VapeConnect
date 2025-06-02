@@ -2,6 +2,7 @@ package com.Tubes.VapeConnects.model;
 
 import jakarta.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -99,4 +100,8 @@ public class Orders {
                 ", totalAmount=" + totalAmount +
                 '}';
     }
+
+    @OneToMany(mappedBy = "order")
+    private List<OrderItem> orderItems;
+
 }

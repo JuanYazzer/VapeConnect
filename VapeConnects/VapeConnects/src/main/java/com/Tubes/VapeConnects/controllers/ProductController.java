@@ -51,6 +51,13 @@ public class ProductController {
                                Principal principal,
                                RedirectAttributes redirectAttributes) {
 
+        // Tambahkan pengecekan apakah principal null
+        if (principal == null) {
+            // Redirect ke halaman login jika belum login
+            redirectAttributes.addFlashAttribute("error", "Silakan login terlebih dahulu untuk memberikan review.");
+            return "redirect:/login";
+        }
+
         String username = principal.getName();
 
         if (reviewService.hasUserReviewedProduct(username, productId)) {
@@ -60,6 +67,11 @@ public class ProductController {
 
         User user = userRepository.findByUsername(username);
         Produk product = productService.getProdukById(productId);
+
+        if (user == null || product == null) {
+            redirectAttributes.addFlashAttribute("error", "Terjadi kesalahan: data user atau produk tidak ditemukan.");
+            return "redirect:/produk";
+        }
 
         Review review = new Review();
         review.setUser(user);
