@@ -54,8 +54,8 @@ public class LogRegController {
         if (user != null && user.getPassword().equals(password)) {
             session.setAttribute("username", user.getUsername());
             session.setAttribute("role", "user");
-            return "redirect:/home/produk"; // ngarah ke halaman user 
-        } else {
+            return "redirect:/home/home"; // ngarah ke halaman user 
+        } else {    
             model.addAttribute("error", "Username atau password salah.");
             return "Login";
         }
@@ -93,16 +93,11 @@ public String registerPost(@RequestParam String username,
     newUser.setUsername(username);
     newUser.setEmail(email);
     newUser.setPassword(password);
-    newUser.setAge(age); // masih disimpan sebagai string
+    newUser.setAge(age); 
 
     userRepository.save(newUser);
 
     return "redirect:/login";
 }
-
-   
-
 }
 
-//tambahin untuk kalau umur <= 18 tahun gabisa buat akun dan buat lagi untuk enkripsi password
-//tambahin lagi alert untuk usernme dan email sudah terpakai
