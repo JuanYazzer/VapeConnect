@@ -32,9 +32,9 @@ public class HomeController {
         return "home/produk";
     }
 
-    @GetMapping("/beranda")
+    @GetMapping("/home")
     public String showBeranda() {
-        return "home/beranda";
+        return "home/home";
     }
     @GetMapping("/riwayat")
     public String showRiwayat() {

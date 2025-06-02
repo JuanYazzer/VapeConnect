@@ -12,7 +12,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private String age; // atau ubah ke int kalau kamu mau umur, atau LocalDate kalau tanggal lahir
+    private String age; 
 
     public User() {
     }
@@ -61,7 +61,7 @@ public class User {
 
 
     public void login(String username, String password) {
-        // Logic for user login
+        // user ogin
         if (this.username.equals(username) && this.password.equals(password)) {
             System.out.println("Login successful for user: " + username);
         } else {
@@ -69,7 +69,7 @@ public class User {
         }
     }
     public void register(String username, String email, String password) {
-        // Logic for user registration
+        // user regis
         this.username = username;
         this.email = email;
         this.password = password;
