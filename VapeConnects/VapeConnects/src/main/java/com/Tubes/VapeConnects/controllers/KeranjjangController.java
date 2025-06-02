@@ -1,35 +1,39 @@
-// package com.Tubes.VapeConnects.controllers;
+package com.Tubes.VapeConnects.controllers;
 
-// import com.Tubes.VapeConnects.model.*;
-// import com.Tubes.VapeConnects.repository.CartRepository;
-// import com.Tubes.VapeConnects.repository.ProdukRepository;
+import com.Tubes.VapeConnects.model.*;
+import com.Tubes.VapeConnects.repository.CartRepository;
+import com.Tubes.VapeConnects.repository.ProdukRepository;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Controller;
-// import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-// @Controller
-// @RequestMapping("/keranjang")
-// public class KeranjjangController {
+@Controller
+@RequestMapping("/keranjang")
+public class KeranjjangController {
 
-//     @Autowired
-//     private CartRepository cartRepo;
+    @Autowired
+    private CartRepository cartRepo;
 
-//     @Autowired
-//     private ProdukRepository produkRepo;
+    @Autowired
+    private ProdukRepository produkRepo;
 
-//     @PostMapping("/tambah")
-//     public String tambahKeKeranjang(@RequestParam int produkId) {
-//         // Ambil produk dari database
-//         Produk produk = produkRepo.findById(produkId)
-//                 .orElseThrow(() -> new RuntimeException("Produk tidak ditemukan"));
+    @PostMapping("/tambah")
+    public String addToCart(@SessionAttribute("user") User user, @RequestParam int productId) {
+        // logic menambahkan item
+        Produk produk = produkRepo.findById(productId).orElseThrow(() -> new IllegalArgumentException("Produk tidak ditemukan"));
+        CartItem cartItem = new CartItem();
+        cartItem.setProduk(produk);
+        Cart cart = cartRepo.findByUser(user).orElse(new Cart());
 
-//         // Buat cart dan item
-//         Cart cart = new Cart(); // nanti bisa disesuaikan dengan user yang login
-//         CartItem item = new CartItem(produk, 1);
-//         cart.addItem(item);
+        cartItem.setProduk(produk);
+        cartItem.setQuantity(1); // default quantity
+        cart.addItem(cartItem);
 
-//         cartRepo.save(cart);
-//         return "redirect:/home/produk";
-//     }
-// }
+        cart.setUser(user);
+        cartRepo.save(cart);
+        // Contoh: setelah menambah ke keranjang, redirect ke halaman keranjang
+        return "redirect:home/produk";
+    }
+
+}

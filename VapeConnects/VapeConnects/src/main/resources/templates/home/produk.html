@@ -15,6 +15,38 @@
     </style>
 </head>
 <body class="bg-light">
+      <!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="/home/home">
+            <img th:src="@{/images/logo.png}" alt="logo vcs" class="me-2" style="height:40px;">
+            <span class="fw-bold">VapeConnect</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav gap-3">
+                <li class="nav-item">
+                    <a href="/home/home" class="nav-link">Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/home/produk" class="nav-link active" aria-current="page">Produk</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link disabled" tabindex="-1" aria-disabled="true">Riwayat Transaksi</a>
+                </li>
+                <li class="nav-item">
+                    <a href="Status_Pemesanan.html" class="nav-link">Keranjang</a>
+                </li>
+            </ul>
+        </div>
+        <div class="d-flex align-items-center ms-auto">
+            <span class="badge bg-primary text-white" th:text="${email}">baskaraputra@gmail.com</span>
+        </div>
+    </div>
+</nav>
 <div>   
     <p th:text="'Selamat datang, ' + ${username}"></p>
 </div>

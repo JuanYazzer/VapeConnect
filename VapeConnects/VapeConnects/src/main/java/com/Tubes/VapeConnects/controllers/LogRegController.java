@@ -52,9 +52,10 @@ public class LogRegController {
         }
 
         if (user != null && user.getPassword().equals(password)) {
+            session.setAttribute("user", user); // ✅ Tambahkan ini untuk menyimpan user di session
             session.setAttribute("username", user.getUsername());
             session.setAttribute("role", "user");
-            return "redirect:/home/produk"; // ngarah ke halaman user 
+            return "redirect:/home/home"; // ngarah ke halaman user 
         } else {
             model.addAttribute("error", "Username atau password salah.");
             return "Login";
