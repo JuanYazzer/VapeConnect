@@ -1,6 +1,6 @@
 package com.Tubes.VapeConnects.controllers;
 
-import com.Tubes.VapeConnects.model.User;
+import com.Tubes.VapeConnects.model.Customer;
 import com.Tubes.VapeConnects.model.Admin;
 
 import java.time.LocalDate;
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
-import com.Tubes.VapeConnects.repository.UserRepository;
+import com.Tubes.VapeConnects.repository.CustomerRepository;
 import com.Tubes.VapeConnects.repository.AdminRepository;
 
 @Controller
 public class LogRegController {
 
     @Autowired
-    private UserRepository userRepository;
+    private CustomerRepository CustomerRepository;
 
     @Autowired
     private AdminRepository adminRepository;
@@ -42,7 +42,7 @@ public class LogRegController {
                         Model model,
                         HttpSession session) {
 
-        User user = userRepository.findByUsername(username);
+        Customer user = (Customer) CustomerRepository.findByUsername(username);
         Admin admin = adminRepository.findByUsername(username); 
 
         if (admin != null && admin.getPassword().equals(password)) {
@@ -75,7 +75,7 @@ public String registerPost(@RequestParam String username,
                            Model model) {
 
     // ngecek apakah username udah digunakan
-    if (userRepository.findByUsername(username) != null) {
+    if (CustomerRepository.findByUsername(username) != null) {
         model.addAttribute("error", "Username sudah digunakan.");
         return "Register";
     }
@@ -90,13 +90,13 @@ public String registerPost(@RequestParam String username,
     }
 
     // nyimpan user baru
-    User newUser = new User();
+    Customer newUser = new Customer();
     newUser.setUsername(username);
     newUser.setEmail(email);
     newUser.setPassword(password);
     newUser.setAge(age); 
 
-    userRepository.save(newUser);
+    CustomerRepository.save(newUser);
 
     return "redirect:/login";
 }
