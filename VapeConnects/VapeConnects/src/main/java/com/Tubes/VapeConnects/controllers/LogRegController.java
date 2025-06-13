@@ -46,7 +46,7 @@ public class LogRegController {
         return "Login";
     } 
 
-    @PostMapping("/login")
+   @PostMapping("/login")
     public String loginPost(@RequestParam String username,
                             @RequestParam String password,
                             Model model,
@@ -59,13 +59,24 @@ public class LogRegController {
             return "Login";
         }
 
-        session.setAttribute("user", user);
         session.setAttribute("username", user.getUsername());
 
         if (user instanceof Admin) {
             session.setAttribute("role", "admin");
+            session.setAttribute("user", user);
             return "redirect:/admin/index";
         } else if (user instanceof Customer) {
+            Customer customer = (Customer) CustomerRepository.findByUsername(user.getUsername());
+
+            // Tambahkan cek kalau cart-nya belum ada
+            if (customer.getCart() == null) {
+                Cart cart = new Cart();
+                cart.setCustomer(customer);
+                customer.setCart(cart);
+                cartRepository.save(cart);
+            }
+
+            session.setAttribute("user", customer); // sekarang cart ikut!
             session.setAttribute("role", "user");
             return "redirect:/home/home";
         } else {
@@ -112,7 +123,6 @@ public class LogRegController {
         newUser.setCart(cart);      // assign cart ke customer
         cart.setCustomer(newUser);  // assign customer ke cart
         CustomerRepository.save(newUser);   // karena cascade di relasi customer→cart, ini udah cukup
-        cartRepository.save(cart); 
         return "redirect:/login";
     }
 }
