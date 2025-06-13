@@ -13,14 +13,16 @@ import lombok.AllArgsConstructor;
 @Entity
 @DiscriminatorValue("CUSTOMER")
 public class Customer extends User {
+    
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "cart_id")
+    @JoinColumn(name = "cart_id") // ini yang penting!
     private Cart cart;
+
+
     private String age; 
     
     public Customer(int id, String username, String email, String password) {
         super(id, username, email, password);
-        this.cart = new Cart();
     }
 
     // Overloaded constructor untuk Customer dengan Cart yang sudah ada

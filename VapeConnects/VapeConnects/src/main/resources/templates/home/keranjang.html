@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Keranjang Belanja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .product-img {
+            width: 80px;
+            height: auto;
+        }
+        .product-row {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+        <div class="container-fluid">
+            <a class="navbar-brand d-flex align-items-center" href="/home/home">
+                <img th:src="@{/images/logo.png}" alt="logo vcs" class="me-2" style="height:40px;">
+                <span class="fw-bold">VapeConnect</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav gap-3">
+                    <li class="nav-item">
+                        <a href="/home/home" class="nav-link">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/home/produk" class="nav-link">Produk</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/produk/produk" class="nav-link">Riwayat Transaksi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/keranjang" class="nav-link active" aria-current="page">Keranjang</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex align-items-center ms-auto">
+                <span class="badge bg-primary text-white" th:text="${email}">baskaraputra@gmail.com</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-3">
+        <p th:text="'Selamat datang, ' + ${username}">Selamat datang, User</p>
+    </div>
+
+    <div class="container mt-4">
+        <h2 class="mb-4">Keranjang Belanja</h2>
+        <table class="table table-bordered table-hover align-middle bg-white">
+            <thead class="table-dark">
+                <tr>
+                    <th>Produk</th>
+                    <th>Harga</th>
+                    <th>Jumlah</th>
+                    <th>Subtotal</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${keranjangList}">
+                    <td th:text="${item.produk != null ? item.produk.name : 'Produk tidak tersedia'}">Nama Produk</td>
+                    <td th:text="${item.produk != null ? item.produk.price : 0}">Harga</td>
+                    <td th:text="${item.quantity}">Jumlah</td>
+                    <td th:text="${item.subTotal}">Subtotal</td>
+                    <td class="text-center">
+                        <form th:action="@{'/keranjang/kurang/' + ${item.id}}" method="post" style="display:inline;">
+                            <button class="btn btn-sm btn-outline-danger" type="submit">–</button>
+                        </form>
+                        <form th:action="@{'/keranjang/tambah/' + ${item.id}}" method="post" style="display:inline;">
+                            <button class="btn btn-sm btn-outline-success" type="submit">+</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(keranjangList)}">
+                    <td colspan="5" class="text-center">Keranjang Anda kosong.</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-end mt-3">
+        <h4>Total: <span th:text="${totalHarga}">0</span></h4>
+        <form th:action="@{/checkout}" method="post">
+            <button type="submit" class="btn btn-success mt-2">Checkout</button>
+        </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

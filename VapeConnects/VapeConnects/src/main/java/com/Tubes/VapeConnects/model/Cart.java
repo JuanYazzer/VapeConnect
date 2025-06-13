@@ -19,25 +19,19 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "cart") // bukan pemilik relasi
+    private Customer customer;
+
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<CartItem> items = new ArrayList<>();
-    
-    @OneToOne
-    @JoinColumn(name = "user_id") // nama kolom di tabel Cart yang menyimpan id user
-    private User user;
 
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
     public void addItem(CartItem item) {
-        item.setCart(this); // pastikan bidirectional konsisten
-        this.items.add(item);
+        items.add(item);
+        item.setCart(this); // penting: set balik relasinya
     }
+
 
     public double calculateTotal() {
         return items.stream()
@@ -45,6 +39,4 @@ public class Cart {
             .mapToDouble(java.math.BigDecimal::doubleValue)
             .sum();
     }
-
-    
 }
