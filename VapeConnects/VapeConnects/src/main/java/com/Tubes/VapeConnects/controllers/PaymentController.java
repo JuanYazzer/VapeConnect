@@ -55,6 +55,7 @@ public class PaymentController {
         order.setTotal(total);
         order.setPaymentMethod(paymentMethod);
         order.setOrderDate(LocalDateTime.now());
+        order.setStatus("Pending"); // Atau status lain sesuai logika bisnis
         orderRepository.save(order);
 
         // Buat dan simpan Payment

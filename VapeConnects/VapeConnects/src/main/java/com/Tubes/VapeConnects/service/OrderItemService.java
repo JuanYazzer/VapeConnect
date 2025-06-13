@@ -1,6 +1,7 @@
 package com.Tubes.VapeConnects.service;
 
 import com.Tubes.VapeConnects.model.OrderItem;
+import com.Tubes.VapeConnects.model.Produk;
 import com.Tubes.VapeConnects.repository.OrderItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,10 @@ public class OrderItemService {
     public List<OrderItem> getAllOrderItems() {
         return orderItemRepository.findAll();
     }
+
+    public List<Produk> getProductsPurchasedByUser(Long userId) {
+    return orderItemRepository.findDistinctProductsByUserId(userId);
+}
+
 
 }

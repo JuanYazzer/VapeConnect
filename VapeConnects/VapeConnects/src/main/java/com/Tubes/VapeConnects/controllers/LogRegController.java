@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 import com.Tubes.VapeConnects.repository.CustomerRepository;
-import com.Tubes.VapeConnects.repository.AdminRepository;
 import com.Tubes.VapeConnects.repository.CartRepository;
 import com.Tubes.VapeConnects.repository.UserRepository;
 
@@ -26,9 +25,6 @@ public class LogRegController {
 
     @Autowired
     private CustomerRepository CustomerRepository;
-
-    @Autowired
-    private AdminRepository adminRepository;
 
     @Autowired
     private UserRepository userRepository;

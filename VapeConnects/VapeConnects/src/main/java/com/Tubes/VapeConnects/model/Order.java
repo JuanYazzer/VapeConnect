@@ -23,6 +23,9 @@ public class Order {
 
     private LocalDateTime orderDate;
 
+    private String status;
+
+    private int rating;
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
