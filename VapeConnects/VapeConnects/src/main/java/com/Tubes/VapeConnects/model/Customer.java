@@ -18,7 +18,6 @@ public class Customer extends User {
     @JoinColumn(name = "cart_id") // ini yang penting!
     private Cart cart;
 
-
     private String age; 
     
     public Customer(int id, String username, String email, String password) {

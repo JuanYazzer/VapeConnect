@@ -58,6 +58,9 @@
 
     <!-- Konten utama -->
     <main class="container">
+        <div th:if="${error}" class="alert alert-danger" role="alert">
+            [[${error}]]
+        </div>
 
         <div class="mt-4">
             <h2 class="mb-4">Keranjang Belanja</h2>

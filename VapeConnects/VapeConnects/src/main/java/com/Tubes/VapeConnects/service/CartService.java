@@ -16,8 +16,15 @@ public class CartService {
 
     public void tambahJumlah(Integer cartItemId) {
         cartItemRepository.findById(cartItemId).ifPresent(item -> {
-            item.setQuantity(item.getQuantity() + 1);
-            cartItemRepository.save(item); // Tidak perlu setSubTotal
+            int stokTersedia = item.getProduk().getStock();
+            int jumlahDiCart = item.getQuantity();
+
+            if (jumlahDiCart + 1 > stokTersedia) {
+                throw new RuntimeException("Stok produk '" + item.getProduk().getName() + "' tidak mencukupi.");
+            }
+
+            item.setQuantity(jumlahDiCart + 1);
+            cartItemRepository.save(item);
         });
     }
 

@@ -2,12 +2,15 @@
 package com.Tubes.VapeConnects.controllers;
 
 import com.Tubes.VapeConnects.model.Cart;
+import com.Tubes.VapeConnects.model.CartItem;
 import com.Tubes.VapeConnects.model.Customer;
 import com.Tubes.VapeConnects.model.Payment;
+import com.Tubes.VapeConnects.model.Produk;
 import com.Tubes.VapeConnects.model.Order;
 import com.Tubes.VapeConnects.repository.PaymentRepository;
 import com.Tubes.VapeConnects.repository.CartRepository;
 import com.Tubes.VapeConnects.repository.OrderRepository;
+import com.Tubes.VapeConnects.repository.ProdukRepository;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +33,9 @@ public class PaymentController {
 
     @Autowired
     private CartRepository cartRepository;
+
+    @Autowired
+    private ProdukRepository produkRepository;
 
     @GetMapping("/payment")
     public String showPaymentForm(Model model, HttpSession session) {
@@ -55,17 +61,34 @@ public class PaymentController {
         order.setTotal(total);
         order.setPaymentMethod(paymentMethod);
         order.setOrderDate(LocalDateTime.now());
-        order.setStatus("Pending"); // Atau status lain sesuai logika bisnis
+        order.setStatus("Pending");
         orderRepository.save(order);
 
         // Buat dan simpan Payment
         Payment payment = new Payment();
         payment.setPaymentMethod(paymentMethod);
         payment.setTotal(total);
-        payment.setTanggal(java.util.Date.from(LocalDateTime.now().atZone(java.time.ZoneId.systemDefault()).toInstant()));
+        payment.setTanggal(java.util.Date.from(LocalDateTime.now()
+                .atZone(java.time.ZoneId.systemDefault())
+                .toInstant()));
         payment.setCustomer(user);
         payment.setOrder(order);
         paymentRepository.save(payment);
+
+        // Kurangi stok setiap produk dalam keranjang
+        for (CartItem item : cart.getItems()) {
+            Produk produk = item.getProduk();
+            int quantity = item.getQuantity();
+
+            if (produk != null) {
+                int stokSaatIni = produk.getStock();
+                if (stokSaatIni < quantity) {
+                    throw new RuntimeException("Stok produk '" + produk.getName() + "' tidak mencukupi.");
+                }
+                produk.setStock(stokSaatIni - quantity);
+                produkRepository.save(produk);
+            }
+        }
 
         // Kosongkan keranjang
         cart.getItems().clear();
@@ -73,6 +96,7 @@ public class PaymentController {
 
         return "redirect:/pembayaran/succes";
     }
+
 
 
 }
