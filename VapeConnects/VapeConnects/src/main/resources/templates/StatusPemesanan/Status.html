@@ -129,31 +129,47 @@
 <body class="d-flex flex-column min-vh-100">
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light navbar-custom">
-    <div class="container-fluid align-items-center">
-      <img src="/images/logo.png" alt="logo vcs" class="logo me-3"/>
-      <div class="d-flex flex-grow-1 justify-content-center menu gap-5">
-        <a href="Beranda.jsp" class="nav-link">Beranda</a>
-        <a href="Produk.jsp" class="nav-link">Produk</a>
-        <a href="../Riwayat_Transaksi/Riwayat_Transaksi.jsp" class="nav-link">Riwayat Transaksi</a>
-        <a href="Status_Pemesanan.jsp" class="nav-link active">Keranjang</a>
-      </div>
-      <div class="user-email">baskaraputra@gmail.com</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
+    <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" th:href="@{/home/home}">
+            <img th:src="@{/images/logo.png}" alt="logo vcs" class="me-2" style="height:40px;">
+            <span class="fw-bold">VapeConnect</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav gap-3">
+                <li class="nav-item"><a th:href="@{/home/home}" class="nav-link">Beranda</a></li>
+                <li class="nav-item"><a th:href="@{/home/produk}" class="nav-link active">Produk</a></li>
+                <li class="nav-item"><a th:href="@{/produk/produk}" class="nav-link">Riwayat Transaksi</a></li>
+                <li class="nav-item"><a th:href="@{/keranjang}" class="nav-link">Keranjang</a></li>
+            </ul>
+        </div>
+        <div class="d-flex align-items-center ms-auto">
+            <span class="badge bg-primary text-white" th:text="${email}">baskaraputra@gmail.com</span>
+        </div>
     </div>
-  </nav>
+</nav>
 
   <!-- Main -->
-  <main class="container status-container flex-grow-1">
-    <div class="d-flex gap-2 mb-4">
-      <button class="tab tab-inactive">Pembayaran</button>
-      <button class="tab tab-active">Status Pemesanan</button>
+<div class="container mt-4">    
+    <div class="d-flex align-items-start mb-4">
+        
+        <span class="fw-bold" style="font-size: 1.75rem;">Status Pemesanan</span>
     </div>
-
-    <div class="table-header">
-      <span class="w-75 text-start">Produk</span>
-      <span class="w-25 text-end">Status</span>
-    </div>
-  </main>
+    <table class="table table-bordered table-hover align-middle bg-white">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Produk</th>
+                <th scope="col">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>
+</div>
 
   <!-- Footer -->
   <footer class="footer mt-auto">
