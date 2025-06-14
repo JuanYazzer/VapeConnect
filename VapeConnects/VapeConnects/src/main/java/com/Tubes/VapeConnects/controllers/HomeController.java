@@ -15,15 +15,20 @@ import com.Tubes.VapeConnects.repository.ProdukRepository;
 @Controller
 @RequestMapping("/home")
 public class HomeController {
-    @Autowired
+
     private final ProdukRepository produkRepository;
-    
+
+    @Autowired
     public HomeController(ProdukRepository produkRepository) {
         this.produkRepository = produkRepository;
     }
+
     @GetMapping("/produk")
     public String showProducts(Model model, HttpSession session) {
         String username = (String) session.getAttribute("username");
+        if (username == null) {
+            username = "Guest"; // default kalau belum login
+        }
         List<Produk> produkList = produkRepository.findAll();
 
         model.addAttribute("username", username);
@@ -33,11 +38,22 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String showBeranda() {
+    public String showBeranda(Model model, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            username = "Guest";
+        }
+        model.addAttribute("username", username);
         return "home/home";
     }
+
     @GetMapping("/riwayat")
-    public String showRiwayat() {
+    public String showRiwayat(Model model, HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            username = "Guest";
+        }
+        model.addAttribute("username", username);
         return "home/riwayat";
     }
 }
