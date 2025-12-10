@@ -56,4 +56,6 @@ public class HomeController {
         model.addAttribute("username", username);
         return "home/riwayat";
     }
+
+    
 }

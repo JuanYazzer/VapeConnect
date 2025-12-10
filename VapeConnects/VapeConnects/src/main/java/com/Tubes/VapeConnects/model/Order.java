@@ -42,7 +42,7 @@ public class Order {
     private String shippingEmail;
 
     private String comment;
-
+    
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;

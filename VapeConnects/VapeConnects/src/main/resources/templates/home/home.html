@@ -22,6 +22,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
         <div class="container-fluid">
+            <!-- Logo -->
             <a class="navbar-brand d-flex align-items-center" href="/home/home">
                 <img th:src="@{/images/logo.png}" alt="logo vcs" class="me-2" style="height:40px;">
                 <span class="fw-bold">VapeConnect</span>
@@ -30,10 +31,12 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
+            <!-- Menu Tengah -->
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav gap-3">
                     <li class="nav-item">
-                        <a href="/home/home" class="nav-link active" aria-current="page">Beranda</a>
+                        <a href="/home/home" class="nav-link active">Beranda</a>
                     </li>
                     <li class="nav-item">
                         <a href="/home/produk" class="nav-link">Produk</a>
@@ -60,11 +63,16 @@
                 <div class="card shadow-sm">
                     <div class="card-body">
                         <h5 class="card-title">Lihat Produk</h5>
-                        <p class="card-text">Temukan berbagai produk vape terbaik di sini.</p>
-                        <a href="/home/produk" class="btn btn-primary">Lihat Produk</a>
+                        <p class="card-text">
+                            Temukan berbagai produk vape terbaik di sini.
+                        </p>
+                        <a href="/home/produk" class="btn btn-primary">
+                            Lihat Produk
+                        </a>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6 mt-3 mt-md-0">
                 <div class="card shadow-sm">
                     <div class="card-body">
