@@ -80,4 +80,44 @@ public class ProductController {
         return "redirect:/produk/riwayat";
     }
 
+    @PostMapping("/comment")
+public String beriKomentarOrder(@RequestParam Long orderId,
+                                @RequestParam String komentar,
+                                HttpSession session,
+                                RedirectAttributes redirectAttributes) {
+
+    User user = (User) session.getAttribute("user");
+
+    if (user == null || !(user instanceof Customer)) {
+        redirectAttributes.addFlashAttribute("error", "Silakan login untuk memberi komentar.");
+        return "redirect:/login";
+    }
+
+    Optional<Order> optionalOrder = orderRepository.findById(orderId);
+    if (optionalOrder.isEmpty()) {
+        redirectAttributes.addFlashAttribute("error", "Order tidak ditemukan.");
+        return "redirect:/produk/riwayat";
+    }
+
+    Order order = optionalOrder.get();
+
+    if (order.getCustomer().getId() != user.getId()) {
+        redirectAttributes.addFlashAttribute("error", "Tidak bisa memberi komentar untuk pesanan orang lain.");
+        return "redirect:/produk/riwayat";
+    }
+
+    // CEGAH KOMENTAR ULANG
+    if (order.getComment() != null && !order.getComment().isEmpty()) {
+        redirectAttributes.addFlashAttribute("error", "Anda sudah memberi komentar pada order ini.");
+        return "redirect:/produk/riwayat";
+    }
+
+    order.setComment(komentar);
+    orderRepository.save(order);
+
+    redirectAttributes.addFlashAttribute("success", "Komentar berhasil disimpan.");
+    return "redirect:/produk/riwayat";
+}
+
+
 }

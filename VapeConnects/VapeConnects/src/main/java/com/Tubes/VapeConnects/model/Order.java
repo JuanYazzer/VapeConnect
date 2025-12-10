@@ -26,6 +26,9 @@ public class Order {
     private String status;
 
     private int rating;
+
+    private String comment;
+    
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;

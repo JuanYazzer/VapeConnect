@@ -212,6 +212,24 @@
       <div th:if="${order.rating != 0}">
         <p>Rating: <span th:text="${order.rating}">5</span> / 5</p>
       </div>
+
+      <!-- Form Komentar -->
+<div>
+    <!-- Jika sudah ada komentar -->
+    <div th:if="${order.comment != null}">
+        <p>Komentar Anda:</p>
+        <p><strong th:text="${order.comment}"></strong></p>
+    </div>
+
+    <!-- Jika belum memberi komentar -->
+    <form th:if="${order.comment == null}" th:action="@{/produk/comment}" method="post">
+        <input type="hidden" name="orderId" th:value="${order.id}" />
+        <label for="komentar">Beri Komentar:</label>
+        <textarea name="komentar" class="form-control mb-2" required></textarea>
+        <button type="submit" class="btn btn-sm btn-dark">Kirim Komentar</button>
+    </form>
+</div>
+
     </div>
   </div>
 </main>
