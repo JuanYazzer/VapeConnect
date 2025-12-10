@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .checkout-container {
+            width: 40%;
+            margin: 40px auto;
+            padding: 25px;
+            border-radius: 8px;
+            background: #ffffff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label { font-weight: bold; margin-top: 10px; display: block; }
+        input, textarea, select {
+            width: 100%; padding: 10px; margin-top: 5px;
+            border: 1px solid #ccc; border-radius: 5px;
+        }
+        button {
+            margin-top: 20px; padding: 12px; width: 100%;
+            background: #28a745; border: none; color: white;
+            font-size: 16px; border-radius: 5px; cursor: pointer;
+        }
+        button:hover { background: #218838; }
+    </style>
+</head>
+
+<body>
+<div class="checkout-container">
+    <h2>Checkout</h2>
+
+    <p><b>Total Pembayaran:</b> Rp <span th:text="${total}"></span></p>
+
+    <form action="/checkout/submit" method="POST">
+
+        <label>Nama Penerima</label>
+        <input type="text" name="shippingName" required>
+
+        <label>Email</label>
+        <input type="email" name="shippingEmail" required>
+
+        <label>Nomor HP</label>
+        <input type="text" name="shippingPhone" required>
+
+        <label>Alamat Lengkap</label>
+        <textarea name="shippingAddress" rows="3" required></textarea>
+
+        <label>Metode Pembayaran</label>
+        <select name="paymentMethod" required>
+            <option value="midtrans">Midtrans</option>
+        </select>
+
+        <button type="submit">Lanjut ke Pembayaran</button>
+    </form>
+</div>
+</body>
+</html>

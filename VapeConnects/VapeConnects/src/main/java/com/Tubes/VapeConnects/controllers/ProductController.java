@@ -73,7 +73,6 @@ public class ProductController {
         }
 
         // Update rating
-        order.setRating(rating);
         orderRepository.save(order);
 
         redirectAttributes.addFlashAttribute("success", "Rating berhasil disimpan.");
