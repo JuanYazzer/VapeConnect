@@ -17,23 +17,30 @@ public class CartItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "produk_id", nullable = false)
     private Produk produk;
 
     @ManyToOne
     @JoinColumn(name = "cart_id", nullable = false)
     private Cart cart;
+
     private int quantity;
     public CartItem(Produk produk, int quantity) {
         this.produk = produk;
         this.quantity = quantity;
     }
-    public void setQuantity(int quantity) {
-        this.quantity = this.quantity+1;
+    public void incrementQuantity() {
+        this.quantity++;
     }
+
+    public void decrementQuantity() {
+        if (this.quantity > 0) {
+            this.quantity--;
+        }
+    }
+
     public java.math.BigDecimal getSubTotal() {
         return produk.getPrice().multiply(java.math.BigDecimal.valueOf(quantity));
     }
-    // Getter & Setter
 }

@@ -12,7 +12,7 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private String age; 
+
 
     public User() {
     }
@@ -30,13 +30,6 @@ public class User {
     }
     public String getEmail() {
         return email;
-    }
-    public String getAge() {
-    return age;
-    }
-
-    public void setAge(String age) {
-    this.age = age;
     }
 
     public void setUsername(String username) {

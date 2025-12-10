@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pembayaran</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container mt-5">
+    <form th:action="@{/payment/submit}" method="post">
+        <div class="mb-3">
+            <label class="form-label"><strong>Metode Pembayaran :</strong></label>
+            <select class="form-select" name="paymentMethod" required>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Transfer Bank">Transfer Bank</option>
+                <option value="E-Money">E-Money</option>
+            </select>
+        </div>
+
+        <input type="hidden" name="total" th:value="${total}"/>
+        <input type="hidden" name="note" value="Pembayaran berhasil"/>
+
+        <button type="submit" class="btn btn-dark">Konfirmasi Pembayaran</button>
+    </form>
+</body>
+</html>
