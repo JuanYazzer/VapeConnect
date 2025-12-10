@@ -41,7 +41,8 @@ public class Order {
     private String shippingPhone;
     private String shippingEmail;
 
-    private String status;
+    private String comment;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
