@@ -43,5 +43,4 @@ public class CartItem {
     public java.math.BigDecimal getSubTotal() {
         return produk.getPrice().multiply(java.math.BigDecimal.valueOf(quantity));
     }
-    // Getter & Setter
 }

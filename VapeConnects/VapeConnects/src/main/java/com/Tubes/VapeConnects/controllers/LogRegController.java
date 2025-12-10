@@ -7,7 +7,8 @@ import com.Tubes.VapeConnects.model.User;
 
 import java.time.LocalDate;
 import java.time.Period;
-import jakarta.servlet.http.HttpSession; 
+
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,10 @@ public class LogRegController {
     @Autowired
     private CartRepository cartRepository;
 
+    @Autowired
+    private com.Tubes.VapeConnects.repository.AdminRepository adminRepository;
+    // ==================== LOGIN ====================
+
     @GetMapping("/")
     public String greeting() {
         return "Login";
@@ -40,7 +45,7 @@ public class LogRegController {
     @GetMapping("/login")
     public String login() {
         return "Login";
-    } 
+    }
 
    @PostMapping("/login")
     public String loginPost(@RequestParam String username,
@@ -49,6 +54,7 @@ public class LogRegController {
                             HttpSession session) {
 
         User user = userRepository.findByUsername(username);
+        Admin admin = adminRepository.findByUsername(username);
 
         if (user == null || !user.getPassword().equals(password)) {
             model.addAttribute("error", "Username atau password salah.");
@@ -81,6 +87,8 @@ public class LogRegController {
         }
     }
 
+
+    // ==================== REGISTER ====================
 
     @GetMapping("/register")
     public String register() {
