@@ -40,4 +40,6 @@ public class HomeController {
     public String showRiwayat() {
         return "home/riwayat";
     }
+
+    
 }
