@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Pembayaran</title>
+    <script 
+        th:src="'https://app.sandbox.midtrans.com/snap/snap.js?client-key=' + ${clientKey}">
+    </script>
+</head>
+
+<body>
+
+<h2 style="text-align:center;">Memproses Pembayaran...</h2>
+
+<script th:inline="javascript">
+    let snapToken = /*[[${snapToken}]]*/ "";
+
+    if (!snapToken) {
+        alert("Snap Token tidak ditemukan!");
+    } else {
+        snap.pay(snapToken, {
+            onSuccess: function(result){
+                console.log(result);
+                window.location.href = "/pembayaran/succes";
+            },
+            onPending: function(result){
+                console.log(result);
+                window.location.href = "/transaksi/pending";
+            },
+            onError: function(result){
+                console.log(result);
+                window.location.href = "/transaksi/gagal";
+            },
+            onClose: function(){
+                alert("Pembayaran dibatalkan.");
+                window.location.href = "/keranjang";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
