@@ -49,6 +49,15 @@
                     </li>
                 </ul>
             </div>
+               <!-- USER INFO + LOGOUT -->
+            <div class="d-flex align-items-center gap-3 ms-auto">
+                <span class="text-muted small" th:text="${email}">
+                    user@email.com
+                </span>
+                <a href="/logout" class="nav-link text-secondary fw-semibold logout-link">
+                    Logout
+                </a>
+            </div>
         </div>
     </nav> 
 

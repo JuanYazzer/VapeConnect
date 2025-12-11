@@ -7,8 +7,7 @@ import com.Tubes.VapeConnects.model.User;
 
 import java.time.LocalDate;
 import java.time.Period;
-
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,10 +32,6 @@ public class LogRegController {
     @Autowired
     private CartRepository cartRepository;
 
-    @Autowired
-    private com.Tubes.VapeConnects.repository.AdminRepository adminRepository;
-    // ==================== LOGIN ====================
-
     @GetMapping("/")
     public String greeting() {
         return "Login";
@@ -45,7 +40,7 @@ public class LogRegController {
     @GetMapping("/login")
     public String login() {
         return "Login";
-    }
+    } 
 
    @PostMapping("/login")
     public String loginPost(@RequestParam String username,
@@ -54,7 +49,6 @@ public class LogRegController {
                             HttpSession session) {
 
         User user = userRepository.findByUsername(username);
-        Admin admin = adminRepository.findByUsername(username);
 
         if (user == null || !user.getPassword().equals(password)) {
             model.addAttribute("error", "Username atau password salah.");
@@ -87,7 +81,6 @@ public class LogRegController {
         }
     }
 
-
     // ==================== REGISTER ====================
 
     @GetMapping("/register")
@@ -97,18 +90,18 @@ public class LogRegController {
 
     @PostMapping("/register")
     public String registerPost(@RequestParam String username,
-                            @RequestParam String email,
-                            @RequestParam String password,
-                            @RequestParam String age,
-                            Model model) {
+                               @RequestParam String email,
+                               @RequestParam String password,
+                               @RequestParam String age,
+                               Model model) {
 
-        // ngecek apakah username udah digunakan
-        if (CustomerRepository.findByUsername(username) != null) {
+        // cek username sudah dipakai atau belum
+        if (userRepository.findByUsername(username) != null) {
             model.addAttribute("error", "Username sudah digunakan.");
             return "Register";
         }
 
-        LocalDate birthDate = LocalDate.parse(age); 
+        LocalDate birthDate = LocalDate.parse(age);
         LocalDate now = LocalDate.now();
         int userAge = Period.between(birthDate, now).getYears();
 
@@ -117,17 +110,22 @@ public class LogRegController {
             return "Register";
         }
 
-        // nyimpan user baru
         Customer newUser = new Customer();
         newUser.setUsername(username);
         newUser.setEmail(email);
         newUser.setPassword(password);
         newUser.setAge(age);
-        Cart cart = new Cart();
-        newUser.setCart(cart);      // assign cart ke customer
-        cart.setCustomer(newUser);  // assign customer ke cart
-        CustomerRepository.save(newUser);   // karena cascade di relasi customer→cart, ini udah cukup
+
+        userRepository.save(newUser);
+
+        return "redirect:/login";
+    }
+
+    // ==================== LOGOUT ====================
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // hapus semua session (user, role, username, dll)
         return "redirect:/login";
     }
 }
-

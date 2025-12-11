@@ -41,7 +41,6 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <!-- Sidebar -->
             <div class="col-md-2 sidebar p-0">
                 <div class="p-3 text-white">
                     <h4 class="text-center mb-4">VapeConnect</h4>
@@ -60,17 +59,15 @@
                 </div>
             </div>
 
-            <!-- Main Content -->
             <div class="col-md-10 p-4">
                 <h2 class="mb-4">Dashboard Admin</h2>
                 
-                <!-- Stats Cards -->
                 <div class="row mb-4">
                     <div class="col-md-4">
                         <div class="card stat-card bg-primary text-white">
                             <div class="card-body">
                                 <h5 class="card-title">Total Penjualan</h5>
-                                <h2>Rp20.000.000</h2>
+                                <h2 th:text="${totalRevenue != null ? 'Rp' + #numbers.formatDecimal(totalRevenue, 0, 'POINT', 0, 'COMMA') : 'Rp0'}">Rp20.000.000</h2>
                                 <p class="mb-0"><small>+15% dari bulan lalu</small></p>
                             </div>
                         </div>
@@ -95,7 +92,6 @@
                     </div>
                 </div>
 
-                <!-- Produk Terlaris - Posisi Lebih Menonjol -->
                 <div class="row mb-4">
                     <div class="col-md-12">
                         <div class="card highlight-card">
@@ -115,9 +111,9 @@
                                         </thead>
                                         <tbody>
                                             <tr th:each="produk : ${bestSellers}">
-                                                <td th:text="${produk.name}">Vape Pro X</td>
-                                                <td th:text="${produk.stock}">45</td>
-                                                <td th:text="'Rp' + ${#numbers.formatDecimal(produk.price, 1, 2, 'COMMA')}">Rp9.000.000</td>
+                                                <td th:text="${produk.namaProduk}">Vape Pro X</td> 
+                                                <td th:text="${produk.totalTerjual}">45</td>
+                                                <td th:text="'Rp' + ${#numbers.formatDecimal(produk.totalPendapatan, 0, 'POINT', 0, 'COMMA')}">Rp9.000.000</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -127,7 +123,6 @@
                     </div>
                 </div>
 
-                <!-- Product Management Table -->
                 <div class="card">
                     <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
                         <h5 class="mb-0">Manajemen Produk</h5>
@@ -151,9 +146,8 @@
                                     <tr th:each="produk : ${allProducts}">
                                         <td th:text="${produk.name}">Produk A</td>
                                         <td th:text="${produk.stock}">50</td>
-                                        <td th:text="'Rp' + ${#numbers.formatDecimal(produk.price, 1, 2, 'COMMA')}">Rp200.000</td>
+                                        <td th:text="'Rp' + ${#numbers.formatDecimal(produk.price, 0, 'POINT', 0, 'COMMA')}">Rp200.000</td>
                                         <td>
-                                            <!-- Status lebih informatif -->
                                             <span th:if="${produk.stock} > 10" class="badge bg-success">Aktif</span>
                                             <span th:if="${produk.stock} <= 10 and ${produk.stock} > 0" class="badge bg-warning">Stok Rendah</span>
                                             <span th:if="${produk.stock} <= 0" class="badge bg-secondary">Habis</span>
@@ -181,14 +175,14 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Konfirmasi sebelum menghapus
+        // Konfirmasi sebelum menghapus (Tidak ada perubahan)
         function confirmDelete(event) {
             if (!confirm('Apakah Anda yakin ingin menghapus produk ini?')) {
                 event.preventDefault();
             }
         }
         
-        // Tambahkan event listener untuk semua tombol hapus
+        // Tambahkan event listener untuk semua tombol hapus (Tidak ada perubahan)
         document.querySelectorAll('a.btn-danger').forEach(button => {
             button.addEventListener('click', confirmDelete);
         });

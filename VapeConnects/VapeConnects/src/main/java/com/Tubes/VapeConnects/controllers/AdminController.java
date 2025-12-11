@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 @Controller
@@ -22,6 +23,9 @@ public class AdminController {
     
     @GetMapping("/index")
     public String index(Model model) {
+        // Ambil nilai total penjualan dari Service
+        BigDecimal totalPenjualan = dashboardService.getTotalPenjualan();
+
         // Ambil data statistik dari service
         Map<String, Object> stats = dashboardService.getDashboardStats();
         
@@ -31,6 +35,10 @@ public class AdminController {
         model.addAttribute("bestSellers", stats.get("bestSellers"));
         model.addAttribute("totalUsers", stats.get("totalUsers"));
         model.addAttribute("lowStockProducts", stats.get("lowStockProducts"));
+        // PERBAIKAN KRITIS: Ganti "totalPenjualan" menjadi "totalRevenue"
+        model.addAttribute("totalRevenue", totalPenjualan); // <-- HARUS totalRevenue
+        
+        model.addAttribute("topSellingProducts", dashboardService.getTopSellingProducts());
         
         return "admin/index";
     }
